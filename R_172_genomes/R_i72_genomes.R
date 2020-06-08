@@ -3,7 +3,7 @@
 ## we have 172, most of which are mammals..
 
 
-source("../R/functions.R")
+source("../R_commmon_functions/functions.R")
 source("~/R/general_functions.R")
 require(RMySQL)
 
