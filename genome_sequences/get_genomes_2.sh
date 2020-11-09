@@ -1,3 +1,15 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:cbed9b2439f62526f8b13e69713c33f3aaad836e5c84dc75ef6d8f464dfe8a7f
-size 384
+#!/bin/bash
+## get primary assemblies as these do not contain so much variance
+## data that we run out of memory
+
+dbs=`head -n 1 ../vertebrate_family_members_1_15.txt`
+
+base=ftp://ftp.ensembl.org/pub/release-97/fasta/
+
+for db in $dbs
+do
+    sp=`echo $db | cut -f 1,2 -d '_'`
+    file=${base}${sp}/dna/*dna.primary_assembly.fa.gz
+    echo "calling wget with $file"
+    wget $file
+done

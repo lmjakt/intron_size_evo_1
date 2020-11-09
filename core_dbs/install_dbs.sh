@@ -1,3 +1,16 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:bc21540cfd44f0695962df0d17501b17b4b7717b8cafcb7c475857c3556d2e08
-size 327
+#!/bin/bash
+
+dbs=`grep -v "#" db_list`
+
+for db in $dbs
+do
+    cd $db
+    echo "creating $db"
+    echo "drop database if exists $db" | mysql
+    echo "create database $db" | mysql
+    sqf=${db}.sql
+    echo $sqf
+    mysql $db < $sqf
+    mysqlimport --fields-terminated-by='\t' --fields_escaped_by=\\ $db -L *.txt
+    cd ..
+done

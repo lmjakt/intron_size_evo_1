@@ -1,3 +1,10 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:dc213a87f572e5389ff1feb28469ce15caad16b419bca7ad73725890cd52ff04
-size 190
+dyn.load("strict_split.so")
+
+str1 <- c("hello,there,", ",kdkd,,", "kdk,kd , akd , lsls,")
+
+for(i in 1:1000000){
+    a <- .Call("strict_split", str1, ",")
+}
+
+.Call("strict_split", str1, "")
+
